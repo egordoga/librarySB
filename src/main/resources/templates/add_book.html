@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Add book</title>
+</head>
+<body>
+<div th:include="header::head"></div>
+<div class="container">
+    <h2>Добавление книги</h2>
+    <br/>
+    <form th:action="@{/add_book}" th:object="${bookForm}" method="post" id="addform" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="inputName">Наименование</label>
+            <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp"
+                   placeholder="Мастер и Маргарита"
+                   required th:field="*{name}">
+            <small id="nameHelp" class="form-text text-muted">Название книги</small>
+        </div>
+
+        <div class="form-group">
+            <label for="fio">Автор</label>
+            <input type="text" class="form-control" id="fio" aria-describedby="emailHelp"
+                   placeholder="Булгаков М.А." required th:field="*{author}">
+            <small id="fioHelp" class="form-text text-muted">фамилия, инициалы</small>
+        </div>
+
+        <div class="form-group">
+            <label for="genre">Жанр</label>
+            <input type="text" class="form-control" id="genre" aria-describedby="emailHelp"
+                   placeholder="Роман" required th:field="*{genre}">
+            <small id="genreHelp" class="form-text text-muted">жанр книги</small>
+        </div>
+
+        <div class="form-group">
+            <label for="publ">Издание</label>
+            <input type="text" class="form-control" id="publ" aria-describedby="emailHelp"
+                   placeholder="Лит Пресс" required th:field="*{publisher}">
+            <small id="publHelp" class="form-text text-muted">наименование издания</small>
+        </div>
+
+        <div class="form-group">
+            <label for="year">Год издания</label>
+            <input type="number" class="form-control" id="year" aria-describedby="emailHelp"
+                   placeholder="2002" required th:field="*{publisherYear}">
+            <small id="priceHelp" class="form-text text-muted">год издания</small>
+        </div>
+
+        <div class="form-group">
+            <label for="inputQuantity">Количество страниц</label>
+            <input type="number" class="form-control" id="inputQuantity" aria-describedby="emailHelp"
+                   placeholder="123" required th:field="*{pageCount}">
+            <small id="quantityHelp" class="form-text text-muted">целое число</small>
+        </div>
+
+        <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input type="text" class="form-control" id="isbn" aria-describedby="emailHelp"
+                   placeholder="ASDF-2558" required th:field="*{isbn}">
+            <small id="isbnHelp" class="form-text text-muted">isbn</small>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Описание</label>
+            <textarea class="form-control" rows="3" id="comment" th:field="*{description}"></textarea>
+            <small id="discrHelp" class="form-text text-muted">краткое описание </small>
+        </div>
+
+
+        <h5>Загрузить картинку</h5>
+        <div class="custom-file">
+            <input type="file" class="form-control-file border" th:field="*{picture}">
+        </div>
+        <h5>Загрузить контент</h5>
+        <div class="custom-file">
+            <input type="file" class="form-control-file border" th:field="*{content}">
+        </div>
+        <br><br>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

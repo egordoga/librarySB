@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Library</title>
+</head>
+<body>
+<div th:include="header::head"></div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button th:each="let:${letters}" type="button" class="btn btn-outline-success" th:text="${let}">...</button>
+        </div>
+    </div>
+    <br/><br/>
+
+    <div class="row">
+        <div class="col-1 ml-1">
+            <ul th:each="genre : ${genres}" th:with="groupp_id=${genre.id}">
+                <li style="list-style-type: none">
+                    <div class="btn-group">
+                        <a class="text-success" href="#"
+                           th:text="${genre.name}">...
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+     <!--   <div class="col-10">
+            <div class="card-group">
+                <ul th:each="book : ${books}">
+                    <li style="list-style-type: none">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" th:src="@{/pict(pictId=${book.id})}" alt="Card image cap"
+                                 style="height: 190px; width:130px; margin: auto"/>
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${book.name}">Название карточки</h5>
+                                <p class="card-text" th:text="${book.description}">...</p>
+                                <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+        <div class="col-md-10">
+            <div class="card-deck" >
+
+                        <div class="card" th:each="book : ${books}">
+                            <img class="card-img-top" th:src="@{/pict(pictId=${book.id})}" alt="Card image cap"
+                                 style="height: 190px; width:130px; margin: auto"/>
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${book.name}">Название карточки</h5>
+                                <p class="card-text" th:text="${book.description}" >...</p>
+
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="card-link">Читать</a>
+                                <a href="#" class="card-link">Скачать</a>
+                            </div>
+                        </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>
