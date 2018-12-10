@@ -8,7 +8,7 @@ import ua.lib_sb.entity.User;
 import ua.lib_sb.services.serviceDB.UserService;
 
 @Component
-public class AuthValidator  implements Validator {
+public class AuthValidator implements Validator {
 
     private final UserService userService;
 
@@ -25,9 +25,8 @@ public class AuthValidator  implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         User user = (User) o;
-        //ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", );
         if (userService.findUserByEmail(user.getEmail()) != null) {
-            errors.rejectValue("email", "error.user","Someone already has that email.");
+            errors.rejectValue("email", "error.user", "Someone already has that email.");
         }
 
     }

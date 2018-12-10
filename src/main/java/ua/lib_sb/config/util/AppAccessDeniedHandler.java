@@ -16,6 +16,7 @@ import java.io.IOException;
 @Component
 public class AppAccessDeniedHandler implements AccessDeniedHandler {
     private Logger logger = LoggerFactory.getLogger(AppAccessDeniedHandler.class);
+
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

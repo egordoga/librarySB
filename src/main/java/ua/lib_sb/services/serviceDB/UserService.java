@@ -8,7 +8,7 @@ import ua.lib_sb.entity.User;
 
 @Service
 @Setter
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
@@ -19,9 +19,8 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public User saveUser(User user) {
+    public void saveUser(User user) {
         userRepository.save(user);
-        return user;
     }
 
     @Override

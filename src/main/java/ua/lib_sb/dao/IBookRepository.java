@@ -3,8 +3,10 @@ package ua.lib_sb.dao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import ua.lib_sb.entity.Book;
 
+@Repository
 public interface IBookRepository extends JpaRepository<Book, Long> {
     Page<Book> findAllByNameStartsWith(String letter, Pageable pageable);
 

@@ -38,7 +38,8 @@ public class EditController {
                 book.getDescription(), book.getAuthor().getName(), book.getGenre().getName(), book.getPublisher().getName());
 
         model.addAttribute("bookForm", bookForm);
-        model.addAttribute("book", book);;
+        model.addAttribute("book", book);
+        ;
         return "edit_book";
     }
 

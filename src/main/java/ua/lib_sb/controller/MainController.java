@@ -76,7 +76,7 @@ public class MainController {
     public void showContent(@ModelAttribute("bId") Long id, HttpServletResponse response) {
         Book book = bookService.findBookById(id);
 
-        try (OutputStream out = response.getOutputStream()){
+        try (OutputStream out = response.getOutputStream()) {
             response.setContentType("application/pdf");
             byte[] content = ArrayUtils.toPrimitive(book.getContent().getContent());
             response.setContentLength(content.length);
@@ -136,6 +136,4 @@ public class MainController {
 
         return "main";
     }
-
-
 }

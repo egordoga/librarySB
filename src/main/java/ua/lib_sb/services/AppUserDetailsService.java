@@ -11,7 +11,6 @@ import ua.lib_sb.entity.Role;
 import ua.lib_sb.entity.User;
 import ua.lib_sb.services.serviceDB.UserService;
 
-import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 

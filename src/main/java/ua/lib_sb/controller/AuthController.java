@@ -24,8 +24,6 @@ import java.util.UUID;
 
 @Controller
 public class AuthController {
-    private static final Byte ACTIVE_FALSE = 0;
-    private static final Byte ACTIVE_TRUE = 1;
 
     @Autowired
     private AuthValidator authValidator;
@@ -44,9 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public ModelAndView doRegistration(Model model, @ModelAttribute UserForm userForm, BindingResult bindingResult) {
-       // model.addAttribute("user", userForm);
-
+    public ModelAndView doRegistration(@ModelAttribute UserForm userForm, BindingResult bindingResult) {
         User user = new User();
         user.setEmail(userForm.getEmail());
         user.setPass(bCryptPasswordEncoder.encode(userForm.getPass()));
@@ -98,9 +94,4 @@ public class AuthController {
     public ModelAndView viewLogin() {
         return new ModelAndView("login");
     }
-
-   /* @PostMapping("/login")
-    public String doLogin(@ModelAttribute("userForm") UserForm userForm) {
-
-    }*/
 }
