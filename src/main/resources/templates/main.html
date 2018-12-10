@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -14,62 +15,93 @@
 <body>
 <div th:include="header::head"></div>
 <div class="container">
-    <div class="row">
+    <div class="row mt-2">
         <div class="col">
-            <button th:each="let:${letters}" type="button" class="btn btn-outline-success" th:text="${let}">...</button>
+            <a th:each="let:${letters}" class="btn btn-outline-success btn-sm" th:text="${let}"
+               th:href="@{/byLetter(let=${let})}">...</a>
         </div>
     </div>
     <br/><br/>
 
     <div class="row">
-        <div class="col-1 ml-1">
-            <ul th:each="genre : ${genres}" th:with="groupp_id=${genre.id}">
+        <div class="col-2">
+            <a class="text-success" href="/main">все книги</a>
+            <ul th:each="genre : ${genres}">
                 <li style="list-style-type: none">
                     <div class="btn-group">
-                        <a class="text-success" href="#"
+                        <a class="text-success" href="#" th:href="@{/byGenre(genId = ${genre.id})}"
                            th:text="${genre.name}">...
                         </a>
                     </div>
                 </li>
             </ul>
         </div>
-     <!--   <div class="col-10">
+        <div class="col-10">
             <div class="card-group">
                 <ul th:each="book : ${books}">
                     <li style="list-style-type: none">
                         <div class="card" style="width: 18rem;">
                             <img class="card-img-top" th:src="@{/pict(pictId=${book.id})}" alt="Card image cap"
                                  style="height: 190px; width:130px; margin: auto"/>
+                            <div class="header">
+                                <h5 class="card-title" th:text="${book.name}" style="margin: auto">Название
+                                    карточки</h5>
+                                <br>
+                                <span><b th:text="|#{author} ${book.author.name}|">...</b></span><br>
+                                <span><b th:text="|#{publisher} ${book.publisher.name}|">...</b></span><br>
+                                <span><b th:text="|#{publisherYear} ${book.publisherYear}|">...</b></span><br>
+                                <span><b th:text="|#{pageCount} ${book.pageCount}|">...</b></span><br>
+                                <span><b th:text="|#{isbn} ${book.isbn}|">...</b></span>
+                            </div>
                             <div class="card-body">
-                                <h5 class="card-title" th:text="${book.name}">Название карточки</h5>
-                                <p class="card-text" th:text="${book.description}">...</p>
-                                <a href="#" class="btn btn-primary">Переход куда-нибудь</a>
+                                <p class="card-text" th:text="${book.description}"
+                                   style="height: 16rem; overflow-y: scroll">...</p>
+                            </div>
+                            <div class="card-footer">
+                                <a class="card-link" target="_blank" th:href="@{/content(bId=${book.id})}" th:text="#{read}">Читать</a>
+                                <a th:if="${isAdmin}" th:href="@{/edit_book(bId=${book.id})}" class="card-link"th:text="#{edit}">Редактировать</a>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-        </div>-->
-        <div class="col-md-10">
-            <div class="card-deck" >
+        </div>
+    </div>
 
-                        <div class="card" th:each="book : ${books}">
-                            <img class="card-img-top" th:src="@{/pict(pictId=${book.id})}" alt="Card image cap"
-                                 style="height: 190px; width:130px; margin: auto"/>
-                            <div class="card-body">
-                                <h5 class="card-title" th:text="${book.name}">Название карточки</h5>
-                                <p class="card-text" th:text="${book.description}" >...</p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="..." th:if="${pages.size() gt 1}">
+                    <ul class="pagination">
+                        <li th:class="((${books.isFirst()}) ? 'page-item disabled' : 'page-item')">
+                            <a class="page-link" href="#" tabindex="-1" th:href="@{${url}(page=${books.getNumber()-1}, size=${books.size})}" th:text="#{previous}">Previous</a>
+                        </li>
+                        <li th:class="((${books.getNumber()} == ${page}) ? 'page-item active' : 'page-item')" th:each="page: ${pages}">
+                            <a class="page-link" th:text="${page + 1}" th:href="@{${url}(page=${page}, size=${books.size})}">1</a></li>
 
-                            </div>
-                            <div class="card-footer">
-                                <a href="#" class="card-link">Читать</a>
-                                <a href="#" class="card-link">Скачать</a>
-                            </div>
-                        </div>
-
+                        <li th:class="((${books.isLast()}) ? 'page-item disabled' : 'page-item')">
+                            <a class="page-link" th:href="@{${url}(page=${books.getNumber()+1}, size=${books.size})}" th:text="#{next}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col">
+                <div class="btn-group" th:if="${books.getNumberOfElements() gt 1}">
+                    <button type="button" class="btn btn-primary" th:text="#{countBook}">Выводить по</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" th:href="@{${url}(page=${books.number}, size=2)}">2</a>
+                        <a class="dropdown-item" th:href="@{${url}(page=${books.number}, size=4)}">4</a>
+                        <a class="dropdown-item" th:href="@{${url}(page=${books.number}, size=6)}">6</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
 </div>
 
 <!-- Optional JavaScript -->

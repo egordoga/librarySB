@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
-public class BookForm {
+public class TestForm {
 
     private String name;
     private String isbn;
@@ -15,18 +15,18 @@ public class BookForm {
     private String description;
     private MultipartFile picture;
     private MultipartFile content;
-    private String author;
-    private String genre;
-    private String publisher;
+    private String authorName;
+    private String genreName;
+    private String publisherName;
 
-    public BookForm(String name, String isbn, int publisherYear, int pageCount, String description, String author, String genre, String publisher) {
+    public TestForm(String name, String isbn, int publisherYear, int pageCount, String description, String authorName, String genreName, String publisherName) {
         this.name = name;
         this.isbn = isbn;
         this.publisherYear = publisherYear;
         this.pageCount = pageCount;
         this.description = description;
-        this.author = author;
-        this.genre = genre;
-        this.publisher = publisher;
+        this.authorName = authorName;
+        this.genreName = genreName;
+        this.publisherName = publisherName;
     }
 }

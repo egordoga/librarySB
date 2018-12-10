@@ -1,4 +1,4 @@
-package ua.lib_sb.serviceDB;
+package ua.lib_sb.services.serviceDB;
 
 import ua.lib_sb.entity.Genre;
 

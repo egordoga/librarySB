@@ -1,6 +1,5 @@
 package ua.lib_sb.controller;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.lib_sb.entity.*;
 import ua.lib_sb.model.BookForm;
-import ua.lib_sb.serviceDB.*;
-
-import java.io.IOException;
+import ua.lib_sb.services.serviceDB.*;
 
 @Controller
 public class AddController {
@@ -38,9 +35,8 @@ public class AddController {
     @PostMapping("/add_book")
     public String addBook(Model model, @ModelAttribute BookForm bookForm) {
         model.addAttribute("bookForm", bookForm);
-
         Book book = new Book();
-        Author authorFromDB = authorService.findAuthorByName(bookForm.getAuthor());
+        /*Author authorFromDB = authorService.findAuthorByName(bookForm.getAuthor());
         Publisher publisherFromDB = publisherService.findPublisherByName(bookForm.getPublisher());
         Genre genreFromDB = genreService.findGenreByName(bookForm.getGenre());
         if (authorFromDB != null) {
@@ -88,7 +84,10 @@ public class AddController {
             e.printStackTrace();
         }
 
-        bookService.saveBook(book);
+        bookService.saveBook(book);*/
+        EditController ec = new EditController(bookService, authorService, publisherService, genreService, contentService);
+        ec.saveFromForm(book, bookForm);
+
         return "redirect:/add_book";
     }
 }

@@ -1,4 +1,4 @@
-package ua.lib_sb.serviceDB;
+package ua.lib_sb.services.serviceDB;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
