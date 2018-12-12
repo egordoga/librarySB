@@ -7,7 +7,6 @@ import ua.lib_sb.dao.IUserRepository;
 import ua.lib_sb.entity.User;
 
 @Service
-@Setter
 public class UserService implements IUserService {
 
     @Autowired
